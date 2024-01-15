@@ -1,0 +1,14 @@
+# Use the official OpenJDK base image for Java 17
+FROM adoptopenjdk/openjdk17:alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application JAR file from the host into the container
+COPY target/your-application.jar /app/your-application.jar
+
+# Expose port 9090 for the application
+EXPOSE 9090
+
+# Specify the command to run your application using the JAR file and H2 database settings
+CMD ["java", "-jar", "your-application.jar", "--server.port=9090", "--spring.datasource.url=jdbc:h2:mem:testdb", "--spring.datasource.driverClassName=org.h2.Driver", "--spring.datasource.username=sa", "--spring.datasource.password=password"]
